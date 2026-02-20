@@ -2,13 +2,18 @@ return {
   -- Kulala.nvim: Test APIs (alternative to Rest.nvim without luarocks dependency)
   {
     "mistweaverco/kulala.nvim",
-    opts = {},
+    opts = {
+      default_view = "body",
+      split_direction = "horizontal",
+    },
     keys = {
       { "<leader>rr", function() require("kulala").run() end, desc = "Run Request (Kulala)" },
-      { "<leader>rl", function() require("kulala").replay() end, desc = "Re-run Last Request (Kulala)" },
-      { "<leader>rp", function() require("kulala").scratchpad() end, desc = "Preview Request / Scratchpad" },
-      { "<leader>rn", function() require("kulala").jump_next() end, desc = "Jump to Next Request" },
-      { "<leader>rN", function() require("kulala").jump_prev() end, desc = "Jump to Previous Request" },
+      { "<leader>rl", function() require("kulala").replay() end, desc = "Re-run Last Request" },
+      { "<leader>rp", function() require("kulala").scratchpad() end, desc = "Scratchpad" },
+      { "<leader>rn", function() require("kulala").jump_next() end, desc = "Next Request" },
+      { "<leader>rN", function() require("kulala").jump_prev() end, desc = "Prev Request" },
+      { "<leader>re", function() require("kulala").set_selected_env() end, desc = "Select Environment" },
+      { "<leader>ri", function() require("kulala").inspect() end, desc = "Inspect Request" },
     },
   },
 
@@ -42,6 +47,8 @@ return {
     cmd = { "DBUI", "DBUIToggle", "DBUIAddConnection", "DBUIFindBuffer" },
     keys = {
       { "<leader>db", "<cmd>DBUIToggle<cr>", desc = "Toggle DB UI" },
+      { "<leader>da", "<cmd>DBUIAddConnection<cr>", desc = "Add DB Connection" },
+      { "<leader>df", "<cmd>DBUIFindBuffer<cr>", desc = "Find DB Buffer" },
     },
   },
 }

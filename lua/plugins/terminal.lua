@@ -9,6 +9,8 @@ return {
       { "<leader>tv", desc = "Toggle Terminal (Vertical)" },
       { "<leader>tg", desc = "Lazygit" },
       { "<leader>tl", desc = "Live Log Tail" },
+      { "<leader>ts", desc = "Spring Boot Terminal" },
+      { "<leader>tS", desc = "Run Spring Boot" },
     },
     opts = {
       size = function(term)
@@ -61,6 +63,16 @@ return {
         end,
       })
 
+      -- Spring Boot terminal (dedicated, numbered #2)
+      local springboot = Terminal:new({
+        count = 2,
+        direction = "vertical",
+        close_on_exit = false,
+        on_open = function()
+          vim.cmd("startinsert!")
+        end,
+      })
+
       -- Keymaps
       local map = vim.keymap.set
 
@@ -70,6 +82,17 @@ return {
 
       map("n", "<leader>tg", function() lazygit:toggle() end, { desc = "Lazygit" })
       map("n", "<leader>tl", function() logtail:toggle() end, { desc = "Log Terminal" })
+
+      -- Spring Boot shortcuts
+      map("n", "<leader>ts", function() springboot:toggle() end, { desc = "Spring Boot Terminal" })
+      map("n", "<leader>tS", function()
+        if not springboot:is_open() then
+          springboot:toggle()
+        end
+        vim.defer_fn(function()
+          springboot:send("./mvnw spring-boot:run")
+        end, 300)
+      end, { desc = "Run Spring Boot" })
 
       -- Terminal mode: Esc to go to normal mode, double Esc to exit
       map("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit Terminal Mode" })

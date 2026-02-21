@@ -1,15 +1,24 @@
 return {
   {
     "mrjones2014/smart-splits.nvim",
-    event = "VeryLazy",
+    -- DO NOT lazy-load: WezTerm integration requires IS_NVIM user var set on startup
+    lazy = false,
     opts = {
       ignored_filetypes = { "nofile", "quickfix", "prompt" },
       ignored_buftypes = { "NvimTree" },
       default_amount = 3,
-      at_edge = "wrap",
+      at_edge = "stop",
+      -- WezTerm multiplexer integration
+      multiplexer_integration = "wezterm",
     },
     keys = {
-      -- Resize splits with Alt + hjkl
+      -- Navigate splits (seamless with WezTerm panes via Ctrl+hjkl)
+      { "<C-h>", function() require("smart-splits").move_cursor_left() end, desc = "Move Left" },
+      { "<C-j>", function() require("smart-splits").move_cursor_down() end, desc = "Move Down" },
+      { "<C-k>", function() require("smart-splits").move_cursor_up() end, desc = "Move Up" },
+      { "<C-l>", function() require("smart-splits").move_cursor_right() end, desc = "Move Right" },
+
+      -- Resize splits (seamless with WezTerm panes via Alt+hjkl)
       { "<A-h>", function() require("smart-splits").resize_left() end, desc = "Resize Left" },
       { "<A-j>", function() require("smart-splits").resize_down() end, desc = "Resize Down" },
       { "<A-k>", function() require("smart-splits").resize_up() end, desc = "Resize Up" },

@@ -22,7 +22,7 @@ Hãy tưởng tượng Neovim là **ngôi nhà của bạn**:
 | `<leader>q`          | 💾 **Session** – Phiên làm việc | **Q**uit/Session = Lưu/khôi phục|
 | `<leader>r`          | 🌐 **REST/Run** – API test | **R**un = Chạy request               |
 | `<leader>d`          | 🗄️ **Database**            | **D**atabase = Kết nối DB            |
-| `<leader>t`          | 🧪 **Test**                | **T**est = Chạy test                 |
+| `<leader>t`          | 🧪 **Test / Terminal**     | **T**est + **T**erm = Test & terminal|
 | `<leader>n`          | 🎨 **Next theme**          | **N**ext = Đổi theme                 |
 
 ---
@@ -329,6 +329,68 @@ Ctrl+h ←  ●  → Ctrl+l     ← Hoạt động cả trong WezTerm!
 
 ---
 
+## 17. ⚡ CODING TOOLS — autopairs · surround · comment · terminal
+
+### 🔗 nvim-autopairs (tự động)
+> Tự đóng `()` `{}` `[]` `""` `''` khi gõ ký tự mở — **không cần làm gì thêm!**
+
+| Tình huống              | Gõ     | Kết quả                  |
+|-------------------------|--------|--------------------------|
+| Normal                  | `(`    | `(│)` cursor ở giữa      |
+| Xóa cặp                 | `BS`   | Xóa cả cặp nếu trống     |
+| Bỏ qua close bracket    | `)`    | Nhảy qua `)` nếu đã có   |
+
+---
+
+### 🎁 nvim-surround — Bao & sửa ký tự quanh text
+
+> **Thuật nhớ:** `y`=Yank-surround  `c`=Change-surround  `d`=Delete-surround
+
+| Mode   | Keymap          | Chức năng                              | Ví dụ                          |
+|--------|-----------------|----------------------------------------|--------------------------------|
+| Normal | `ys{m}{c}`      | Thêm surround `{c}` quanh `{motion}`  | `ysiw"` → bao word bằng `""`  |
+| Normal | `yss{c}`        | Bao cả dòng                            | `yss)` → `(cả dòng)`           |
+| Normal | `cs{old}{new}`  | Đổi surround                           | `cs"'` → `""` → `''`          |
+| Normal | `ds{c}`         | Xóa surround                           | `ds"` → bỏ `""`              |
+| Visual | `S{c}`          | Bao vùng chọn                          | `S]` → bao selection bằng `[]` |
+
+**Ký tự hay dùng:** `"` `'` `` ` `` `(` `)` `[` `]` `{` `}` `t`=HTML tag
+
+---
+
+### 💬 Comment.nvim — Comment nhanh
+
+| Mode   | Keymap       | Chức năng                         | Mẹo nhớ                  |
+|--------|--------------|-----------------------------------|---------------------------|
+| Normal | `gcc`        | Comment/uncomment dòng hiện tại   | **G**o **C**omment **C**urrent |
+| Normal | `gbc`        | Block comment dòng hiện tại       | **G**o **B**lock **C**omment   |
+| Normal | `gc{motion}` | Comment theo motion                | `gc5j` = comment 5 dòng   |
+| Normal | `gb{motion}` | Block comment theo motion          | `gb}` = comment tới `}`   |
+| Visual | `gc`         | Comment vùng chọn                 | Select rồi `gc`           |
+| Visual | `gb`         | Block comment vùng chọn           | Select rồi `gb`           |
+
+---
+
+### 🖥️ ToggleTerm — Terminal tích hợp (`<leader>t` / `Ctrl+\`)
+
+| Keymap        | Chức năng                       | Mẹo nhớ                    |
+|---------------|---------------------------------|----------------------------|
+| `Ctrl+\`      | Toggle terminal (float mặc định)| \ = terminal toggle        |
+| `<leader>tf`  | Terminal **Float**              | **T**erm **F**loat         |
+| `<leader>th`  | Terminal **Horizontal** (below) | **T**erm **H**orizontal    |
+| `<leader>tv`  | Terminal **Vertical** (side)    | **T**erm **V**ertical      |
+| `<leader>tg`  | **LazyGit** trong terminal      | **T**erm **G**it           |
+
+**Trong terminal mode:**
+
+| Keymap  | Chức năng              |
+|---------|------------------------|
+| `Esc`   | Thoát về Normal mode   |
+| `jk`    | Thoát về Normal mode   |
+| `Ctrl+\`| Toggle đóng/mở lại     |
+
+---
+
 ## 🎯 QUICK REFERENCE CARD — Top 20 cho Beginner
 
 ```
@@ -351,10 +413,10 @@ Ctrl+h ←  ●  → Ctrl+l     ← Hoạt động cả trong WezTerm!
 │  14. Space a      → Đánh dấu file (Harpoon)                 │
 │  15. Space 1-4    → Nhảy đến file đã đánh dấu               │
 │  16. Space xq     → Xem lỗi toàn project                    │
-│  17. ciw          → Đổi word nhanh                           │
-│  18. dd / yy / p  → Xóa / Copy / Paste dòng                │
-│  19. u / Ctrl+r   → Undo / Redo                             │
-│  20. Space qq     → Thoát Neovim                             │
+│  17. gcc          → Comment/uncomment dòng (Comment.nvim)    │
+│  18. ysiw"        → Bao word bằng "" (nvim-surround)        │
+│  19. Ctrl+\       → Toggle terminal (toggleterm)             │
+│  20. ciw          → Đổi word nhanh                           │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -370,4 +432,4 @@ Ctrl+h ←  ●  → Ctrl+l     ← Hoạt động cả trong WezTerm!
 
 ---
 
-*📅 Generated: 2026-02-21 | Config: LazyVim + Harpoon + Smart-Splits + Kulala + Dadbod + DAP*
+*📅 Updated: 2026-03-10 | Config: LazyVim + Harpoon + Smart-Splits + Kulala + Dadbod + DAP + autopairs + surround + Comment + ToggleTerm*

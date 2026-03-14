@@ -10,3 +10,7 @@ vim.opt.foldmethod = "expr"
 vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 99
+
+-- Enable word wrap for long lines
+vim.opt.wrap = true
+vim.opt.linebreak = true -- wrap at word boundaries

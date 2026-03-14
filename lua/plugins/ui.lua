@@ -413,6 +413,9 @@ return {
       extension = {
         rs = { glyph = "", hl = "MiniIconsOrange" },
       },
+      file = {
+        ["Cargo.toml"] = { glyph = "", hl = "MiniIconsOrange" },
+      },
     },
   },
 }
